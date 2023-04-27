@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://hd4fjy8qs0fp"]
+
+[ext_resource type="Script" path="res://gun/gun.gd" id="1_vl2nv"]
+[ext_resource type="Texture2D" uid="uid://g4hjlw1o0oo7" path="res://gun/specialBarrel6_outline.png" id="2_cs31b"]
+
+[node name="gun" type="Sprite2D"]
+script = ExtResource("1_vl2nv")
+
+[node name="launch_pos" type="Node2D" parent="."]
+position = Vector2(27, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15, 0)
+rotation = 1.5708
+texture = ExtResource("2_cs31b")
+
+[node name="reload_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]

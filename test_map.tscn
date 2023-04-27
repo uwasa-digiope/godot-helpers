@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://dd1rnk8jn3gxc"]
+
+[ext_resource type="Script" path="res://player_2d_top/player_2d_top.gd" id="1_r65u8"]
+[ext_resource type="Texture2D" uid="uid://75vo0fta5trj" path="res://icon.svg" id="2_2avuf"]
+[ext_resource type="Script" path="res://twin_stick_aimer/twin_stick_aimer.gd" id="3_frqud"]
+[ext_resource type="Texture2D" uid="uid://d3ph6nm728vp3" path="res://twin_stick_aimer/crosshair091.png" id="4_63gli"]
+[ext_resource type="PackedScene" uid="uid://hd4fjy8qs0fp" path="res://gun/gun.tscn" id="5_nyaoi"]
+[ext_resource type="PackedScene" uid="uid://dcmg2y6jav7vw" path="res://gun/bullet.tscn" id="6_k7xi7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4kb3u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2avuf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lul3t"]
+
+[node name="map" type="Node2D"]
+
+[node name="player_2d_top" type="CharacterBody2D" parent="." groups=["player"]]
+script = ExtResource("1_r65u8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player_2d_top"]
+position = Vector2(1.14441e-05, -1.14441e-05)
+scale = Vector2(0.242188, 0.242188)
+sprite_frames = SubResource("SpriteFrames_4kb3u")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_2d_top"]
+shape = SubResource("CapsuleShape2D_lul3t")
+
+[node name="twin_stick_aimer" type="Node2D" parent="player_2d_top"]
+script = ExtResource("3_frqud")
+
+[node name="crosshair" type="Sprite2D" parent="player_2d_top/twin_stick_aimer"]
+position = Vector2(100, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_63gli")
+
+[node name="gun" parent="player_2d_top/twin_stick_aimer" instance=ExtResource("5_nyaoi")]
+bullet = ExtResource("6_k7xi7")
